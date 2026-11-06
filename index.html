@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>De-Extinction Governance & Corporate Self-Regulation: Debate Cards & Evidence</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef2f8;
+      --text: #121826;
+      --muted: #5b6475;
+      --border: rgba(18, 24, 38, 0.12);
+      --accent: #335cff;
+      --accent-2: #0f766e;
+      --danger: #b42318;
+      --shadow: 0 10px 30px rgba(18, 24, 38, 0.08);
+      --radius: 18px;
+      --maxw: 1120px;
+      --line: 1.65;
+      --sidebar-width: 260px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: var(--line);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--accent); text-decoration: none; word-break: break-word; overflow-wrap: break-word; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .toc-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-item {
+      margin-bottom: 8px;
+    }
+
+    .toc-link {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .toc-link:hover {
+      background: var(--surface-2);
+    }
+
+    .toc-link.active {
+      background: var(--accent);
+      color: #1a1a1a;
+    }
+
+    /* Color-coded TOC items — 10 color slots */
+    .toc-item:nth-child(1) .toc-link { border-left: 4px solid #2d6a4f; background: rgba(184, 224, 208, 0.3); }
+    .toc-item:nth-child(2) .toc-link { border-left: 4px solid #1d3557; background: rgba(197, 213, 216, 0.3); }
+    .toc-item:nth-child(3) .toc-link { border-left: 4px solid #457b9d; background: rgba(200, 223, 240, 0.3); }
+    .toc-item:nth-child(4) .toc-link { border-left: 4px solid #4a4e69; background: rgba(192, 201, 208, 0.3); }
+    .toc-item:nth-child(5) .toc-link { border-left: 4px solid #9d4edd; background: rgba(237, 213, 206, 0.3); }
+    .toc-item:nth-child(6) .toc-link { border-left: 4px solid #6c757d; background: rgba(197, 200, 202, 0.3); }
+    .toc-item:nth-child(7) .toc-link { border-left: 4px solid #40916c; background: rgba(192, 230, 208, 0.3); }
+    .toc-item:nth-child(8) .toc-link { border-left: 4px solid #7b2cbf; background: rgba(224, 208, 232, 0.3); }
+    .toc-item:nth-child(9) .toc-link { border-left: 4px solid #d4a373; background: rgba(240, 224, 192, 0.3); }
+    .toc-item:nth-child(10) .toc-link { border-left: 4px solid #5c677d; background: rgba(200, 213, 229, 0.3); }
+
+    .toc-item:nth-child(1) .toc-link.active { background: #b8e0d0; }
+    .toc-item:nth-child(2) .toc-link.active { background: #c5d5d8; }
+    .toc-item:nth-child(3) .toc-link.active { background: #c8dff0; }
+    .toc-item:nth-child(4) .toc-link.active { background: #c0c9d0; }
+    .toc-item:nth-child(5) .toc-link.active { background: #edd5ce; }
+    .toc-item:nth-child(6) .toc-link.active { background: #c5c8ca; }
+    .toc-item:nth-child(7) .toc-link.active { background: #c0e6d0; }
+    .toc-item:nth-child(8) .toc-link.active { background: #e0d0e8; }
+    .toc-item:nth-child(9) .toc-link.active { background: #f0e0c0; }
+    .toc-item:nth-child(10) .toc-link.active { background: #c8d5e5; }
+
+    .toc-sublist {
+      list-style: none;
+      padding-left: 16px;
+      margin: 4px 0 0;
+    }
+
+    .toc-sublist.collapsed { display: none; }
+
+    .toc-subitem {
+      margin-bottom: 4px;
+    }
+
+    .toc-sublink {
+      font-size: 0.9rem;
+      padding: 4px 8px;
+      color: var(--muted);
+    }
+
+    .toc-sublink:hover {
+      background: var(--surface-2);
+    }
+
+    .toc-sublink.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 24px;
+      max-width: calc(100% - var(--sidebar-width));
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .hero { padding: 34px 0 18px; }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+    }
+
+    .lede {
+      max-width: 70ch;
+      font-size: 1.06rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    @media (max-width: 900px) {
+      .container { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); padding: 16px; }
+      .main-content { max-width: 100%; padding: 16px; }
+      .toc-title { display: none; }
+      .toc-list { display: flex; flex-wrap: wrap; gap: 8px; }
+      .toc-item { flex: 1 1 auto; }
+      .toc-link { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .toc-sublist.collapsed { display: none; }
+      .grid.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .stat strong { font-size: 1.8rem; letter-spacing: -0.03em; }
+    .stat span { color: var(--muted); }
+
+    /* Content sections — 10 color slots, rotate for >10 */
+    .section {
+      margin: 30px 0;
+      padding: 24px;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--border);
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section h3 {
+      margin: 20px 0 10px;
+      font-size: 1.1rem;
+    }
+
+    /* Section color slots — matches TOC colors */
+    #section-1  { background: #d9eae0; border-left-color: #2d6a4f; }
+    #section-2  { background: #dde6e7; border-left-color: #1d3557; }
+    #section-3  { background: #e4eff7; border-left-color: #457b9d; }
+    #section-4  { background: #d7dfe4; border-left-color: #4a4e69; }
+    #section-5  { background: #f6e9e5; border-left-color: #9d4edd; }
+    #section-6  { background: #dde0e2; border-left-color: #6c757d; }
+    #section-7  { background: #e1f4e8; border-left-color: #40916c; }
+    #section-8  { background: #f0e6f5; border-left-color: #7b2cbf; }
+    #section-9  { background: #fff2d9; border-left-color: #d4a373; }
+    #section-10 { background: #e8f0f7; border-left-color: #5c677d; }
+
+    /* Sub-section cards — lighter shade of parent section */
+    .sub-section {
+      background: rgba(255,255,255,0.5);
+      border-left: 3px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin: 14px 0;
+    }
+
+    #section-1  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #2d6a4f; }
+    #section-2  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #1d3557; }
+    #section-3  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #457b9d; }
+    #section-4  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #4a4e69; }
+    #section-5  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #9d4edd; }
+    #section-6  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #6c757d; }
+    #section-7  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #40916c; }
+    #section-8  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #7b2cbf; }
+    #section-9  .sub-section { background: rgba(255,255,255,0.55); border-left-color: #d4a373; }
+    #section-10 .sub-section { background: rgba(255,255,255,0.55); border-left-color: #5c677d; }
+
+    /* Source cards — used for cited references with URLs */
+    .source-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .source-card blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    .source-card p {
+      margin: 8px 0;
+    }
+
+    .source-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .source-url {
+      word-break: break-all;
+      overflow-wrap: break-word;
+    }
+
+    .source-url a {
+      display: block;
+      word-break: break-all;
+    }
+
+    .source-date {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .source-quote {
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* Source-specific border colors */
+    .source-card[data-source="rand"]             { border-left-color: #335cff; }
+    .source-card[data-source="brookings"]        { border-left-color: #0f766e; }
+    .source-card[data-source="csis"]             { border-left-color: #8a2be2; }
+    .source-card[data-source="cfr"]              { border-left-color: #ff7f00; }
+    .source-card[data-source="foreign-affairs"]  { border-left-color: #ff0000; }
+    .source-card[data-source="nyt"]              { border-left-color: #ffd700; }
+    .source-card[data-source="washington-post"]  { border-left-color: #008080; }
+    .source-card[data-source="ifri"]             { border-left-color: #ff69b4; }
+
+    .section ul, .section ol { margin: 0; padding-left: 18px; }
+    .section li { margin: 10px 0; }
+
+    .section table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+
+    .section th, .section td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section th {
+      font-weight: 600;
+      background: var(--surface-2);
+    }
+
+    .muted { color: var(--muted); }
+
+    .tagrow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .callout {
+      border-left: 4px solid var(--accent-2);
+      padding: 16px 18px;
+      background: color-mix(in srgb, var(--accent-2) 10%, var(--surface));
+      border-radius: 14px;
+    }
+
+    .danger {
+      border-left-color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 9%, var(--surface));
+    }
+
+    .footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      border-top: 1px solid var(--border);
+      margin-top: 30px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* Back-to-top floating button — mobile only */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-to-top:hover {
+      background: var(--surface-2);
+    }
+
+    @media (min-width: 901px) {
+      .back-to-top { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h3 class="toc-title">Contents</h3>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#section-1" class="toc-link">Executive Summary & Debate Utility</a></li>
+<li class="toc-item"><a href="#section-2" class="toc-link">CARD 1: De-Extinction Is Going Forward Unregulated; Corporate Self-Regulation Replaces Government Authority</a></li>
+<li class="toc-item"><a href="#section-3" class="toc-link">CARD 2: Colossal Biosciences’ Own Endorsed Guidance Concedes a Fundamental "Policy Vacuum"</a></li>
+<li class="toc-item"><a href="#section-4" class="toc-link">CARD 3: The "Extinct Species Gap": Lab-Engineered De-Extinct Organisms Operate in an Absolute Federal Regulatory Void</a></li>
+<li class="toc-item"><a href="#section-5" class="toc-link">CARD 4: De-Extinction Is "Critically Under-Regulated"; Absence of a Primary Regulator Leaves Governance to Private Soft Law</a></li>
+<li class="toc-item"><a href="#section-6" class="toc-link">CARD 5: Conservation Biotechnology Is Driven by Private Capital and Opaque Governance Outside International Treaties</a></li>
+<li class="toc-item"><a href="#section-7" class="toc-link">CARD 6: Private Corporations Prioritize Pecuniary Interests While Core Statutory Protections Break Down</a></li>
+<li class="toc-item"><a href="#section-8" class="toc-link">CARD 7: No Global Legal Framework Exists to Regulate or Bound De-Extinct Species</a></li>
+<li class="toc-item"><a href="#section-9" class="toc-link">CARD 8: Corporate Self-Governance in Practice: Internal Voluntary Safeguards Are the Sole Barrier</a></li>
+<li class="toc-item"><a href="#section-10" class="toc-link">Strategic Debate Round Breakdown</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="wrap">
+        <section class="hero">
+          <div class="eyebrow">Research Report</div>
+          <h1>De-Extinction Governance & Corporate Self-Regulation: Debate Cards & Evidence</h1>
+          <p class="lede">Resolution Context / Topic: De-extinction biotechnology (e.g., Colossal Biosciences' projects to revive proxy mammoths, thylacines, dodos, dire wolves) operates within an acknowledged domestic and int</p>
+          <div class="grid cols-3 section">
+            <div class="card stat">
+              <strong>10</strong>
+              <span>Topic Sections</span>
+            </div>
+            <div class="card stat">
+              <strong>0</strong>
+              <span>Sub-Sections</span>
+            </div>
+            <div class="card stat">
+              <strong>13</strong>
+              <span>Sources Cited</span>
+            </div>
+          </div>
+        </section>
+
+        <p><strong>Resolution Context / Topic:</strong> De-extinction biotechnology (e.g., Colossal Biosciences' projects to revive proxy mammoths, thylacines, dodos, dire wolves) operates within an acknowledged domestic and international regulatory vacuum. With no statutes, treaties, or federal agencies holding integrated authority over gene-edited extinct proxies, de facto governance, safety thresholds, and release criteria are dictated by private biotechnology corporations themselves.</p>
+<section id="section-1" class="section">
+<h2>Executive Summary &amp; Debate Utility</h2>
+<ul>
+<li><strong>The Inherency / Uniqueness Claim:</strong> There is no dedicated statute, international treaty, or federal agency equipped with clear legal jurisdiction over the recreation and wild release of extinct proxy animals. The Endangered Species Act (ESA) cannot classify extinct animals (which lack extant populations or "range"), the Coordinated Framework for Biotechnology splits molecular and welfare rules without lifecycle wild-release oversight, and global biodiversity treaties (CITES, CBD) lack direct mechanisms.</li>
+<li><strong>The Link / Self-Regulation Claim:</strong> Because statutory governance does not exist, governance defaults to <strong>private self-regulation</strong>. Biotechnology companies like Colossal Biosciences establish their own internal ethics boards, draft their own voluntary standards, and operate according to commercial and pecuniary priorities rather than binding democratic or public-trust mandates.</li>
+<li><strong>The Impact / Risk Claim:</strong> Private self-regulation creates moral hazards, proprietary ownership over revived ecosystems, unchecked corporate discretion over ecological introduction, and permanent genetic changes to wild biomes without accountability or public oversight.</li>
+</ul>
+</section>
+<section id="section-2" class="section">
+<h2>CARD 1: De-Extinction Is Going Forward Unregulated; Corporate Self-Regulation Replaces Government Authority</h2>
+<p><strong>Author:</strong> Hope M. Babcock (Professor of Law, Georgetown University Law Center)<br/>
+<strong>Publication:</strong> <em>The Genie is Out of the De-Extinction Bottle: A Problem in Risk Regulation and Regulatory Gaps</em>, Georgetown Law Faculty Publications (SSRN / Environmental Law), Dec 3, 2019<br/>
+<strong>Source URL:</strong> <a href="https://scholarship.law.georgetown.edu/facpub/2210/">https://scholarship.law.georgetown.edu/facpub/2210/</a><br/>
+<strong>Direct PDF Link:</strong> <a href="https://scholarship.law.georgetown.edu/cgi/viewcontent.cgi?article=3228&amp;context=facpub">https://scholarship.law.georgetown.edu/cgi/viewcontent.cgi?article=3228&amp;context=facpub</a></p>
+<blockquote>
+<p>"science appears to be outpacing the ability of government agencies to respond to the legal, moral, and practical questions that these endeavors raise. <strong>Existing laws, like the Endangered Species Act ('ESA'), are inadequate to respond to the environmental and public welfare risks these ventures pose. At the same time, the overlapping and conflicting policies governing genetic engineering, upon which de-extinction depends, have created a dysfunctional regulatory commons in which no single agency is responsible for creating, implementing, and enforcing applicable rules.</strong> … Thus, the <strong>existing regulatory gap will enable de-extinction activities to continue unrestrained</strong>, and there is little hope of government action closing this gap any time soon."</p>
+<p>"<strong>In sum, de-extinction is going forward unregulated. Existing environmental laws do not apply, and any effort to adjust these statutes through amendments or through new legislation will likely fail.</strong>"</p>
+<p>"<strong>This article proposes that participants in the field of de-extinction undertake traditional governmental functions, including setting, implementing, and enforcing performance standards, until external regulations are developed.</strong> However, <strong>self-regulation or private governance may not arise on its own</strong>. Therefore, this article suggests that pressure from the application of social norms … might encourage participants in the field of de-extinction to self-regulate."</p>
+</blockquote>
+<p>"science appears to be outpacing the ability of government agencies to respond to the legal, moral, and practical questions that these endeavors raise. <strong>Existing laws, like the Endangered Species Act ('ESA'), are inadequate to respond to the environmental and public welfare risks these ventures pose. At the same time, the overlapping and conflicting policies governing genetic engineering, upon which de-extinction depends, have created a dysfunctional regulatory commons in which no single agency is responsible for creating, implementing, and enforcing applicable rules.</strong> … Thus, the <strong>existing regulatory gap will enable de-extinction activities to continue unrestrained</strong>, and there is little hope of government action closing this gap any time soon."</p>
+<p>"<strong>In sum, de-extinction is going forward unregulated. Existing environmental laws do not apply, and any effort to adjust these statutes through amendments or through new legislation will likely fail.</strong>"</p>
+<p>"<strong>This article proposes that participants in the field of de-extinction undertake traditional governmental functions, including setting, implementing, and enforcing performance standards, until external regulations are developed.</strong> However, <strong>self-regulation or private governance may not arise on its own</strong>. Therefore, this article suggests that pressure from the application of social norms … might encourage participants in the field of de-extinction to self-regulate."</p>
+</section>
+<section id="section-3" class="section">
+<h2>CARD 2: Colossal Biosciences’ Own Endorsed Guidance Concedes a Fundamental "Policy Vacuum"</h2>
+<p><strong>Author / Issuing Body:</strong> International Union for Conservation of Nature (IUCN) Species Survival Commission (SSC); hosted, endorsed, and cited by Colossal Biosciences as its primary ethical compliance framework<br/>
+<strong>Publication:</strong> <em>De-extinction of Proxy Species: Guidelines for Conservation Practitioners and Policymakers</em> (hosted on Colossal Biosciences official website)<br/>
+<strong>Source URL:</strong> <a href="https://colossal.com/wp-content/uploads/De-extinction-of-proxy-species.pdf">https://colossal.com/wp-content/uploads/De-extinction-of-proxy-species.pdf</a><br/>
+<strong>Corporate Safeguards URL:</strong> <a href="https://colossal.com/colossal-biosciences-ethics-oversight-safeguards/">https://colossal.com/colossal-biosciences-ethics-oversight-safeguards/</a></p>
+<blockquote>
+<p>"<strong>In large part there is a policy vacuum in relation to the specific issue of creating proxies of extinct species for conservation benefit.</strong>"</p>
+<p>"<strong>Proxy species will be categorized differently by different authorities, and thus would not necessarily automatically replace extinct species within national or international legislation.</strong>"</p>
+<p>"<strong>It is beyond the scope of these guidelines to consider how national species/biodiversity management legislation might be applied in the case of proxy species creation, e.g. Endangered Species Act (USA), Species at Risk (Canada), Wildlife Act (NZ).</strong>"</p>
+</blockquote>
+<p>"<strong>In large part there is a policy vacuum in relation to the specific issue of creating proxies of extinct species for conservation benefit.</strong>"</p>
+<p>"<strong>Proxy species will be categorized differently by different authorities, and thus would not necessarily automatically replace extinct species within national or international legislation.</strong>"</p>
+<p>"<strong>It is beyond the scope of these guidelines to consider how national species/biodiversity management legislation might be applied in the case of proxy species creation, e.g. Endangered Species Act (USA), Species at Risk (Canada), Wildlife Act (NZ).</strong>"</p>
+<p><em>(Debate Warrant: Even the formal guidelines hosted by Colossal Biosciences acknowledge that statutory wildlife acts do not reach proxy de-extinction, leaving compliance purely up to voluntary adoption by the private developers themselves.)</em></p>
+</section>
+<section id="section-4" class="section">
+<h2>CARD 3: The "Extinct Species Gap": Lab-Engineered De-Extinct Organisms Operate in an Absolute Federal Regulatory Void</h2>
+<p><strong>Author:</strong> Montrachet Soffer (Department of Environmental Science and Policy, George Mason University)<br/>
+<strong>Publication:</strong> <em>Journal of Science Policy &amp; Governance</em>, Vol. 28, Issue 1 (Policy Analysis: "Establishing a Regulatory Framework for Cloning in Wild Animal Conservation"), 2026<br/>
+<strong>Source URL:</strong> <a href="https://www.sciencepolicyjournal.org/uploads/5/4/3/4/5434385/soffer_jspg_28-1.pdf">https://www.sciencepolicyjournal.org/uploads/5/4/3/4/5434385/soffer_jspg_28-1.pdf</a><br/>
+<strong>Article Landing URL:</strong> <a href="https://www.sciencepolicyjournal.org/article_1038126_jspg280108.html">https://www.sciencepolicyjournal.org/article_1038126_jspg280108.html</a></p>
+<blockquote>
+<p>"<strong>The 'extinct species gap': Because the [extinct species] is extinct and cannot be formally listed under the ESA, Colossal's project operates in a regulatory vacuum where no federal oversight exists to verify scientific claims or safety.</strong>"</p>
+<p>"<strong>The regulatory framework governing animal cloning in the US contains a significant gap: while domestic species are covered by commercial laws, there are no federal rules specifically dedicated to the cloning and genetic engineering of wild, endangered, or extinct species. This allows private companies to pursue 'de-extinction' projects focused on spectacle</strong>…"</p>
+<p>"<strong>Gap for extinct species: Section 10(j) only applies to species currently listed as 'threatened' or 'endangered' … This leaves a legal gap for 'de-extinction' projects involving species that cannot be formally listed because they no longer exist.</strong>"</p>
+</blockquote>
+<p>"<strong>The 'extinct species gap': Because the [extinct species] is extinct and cannot be formally listed under the ESA, Colossal's project operates in a regulatory vacuum where no federal oversight exists to verify scientific claims or safety.</strong>"</p>
+<p>"<strong>The regulatory framework governing animal cloning in the US contains a significant gap: while domestic species are covered by commercial laws, there are no federal rules specifically dedicated to the cloning and genetic engineering of wild, endangered, or extinct species. This allows private companies to pursue 'de-extinction' projects focused on spectacle</strong>…"</p>
+<p>"<strong>Gap for extinct species: Section 10(j) only applies to species currently listed as 'threatened' or 'endangered' … This leaves a legal gap for 'de-extinction' projects involving species that cannot be formally listed because they no longer exist.</strong>"</p>
+</section>
+<section id="section-5" class="section">
+<h2>CARD 4: De-Extinction Is "Critically Under-Regulated"; Absence of a Primary Regulator Leaves Governance to Private Soft Law</h2>
+<p><strong>Author:</strong> Molly Woodward (Legal Scholar &amp; Environmental Law Fellow)<br/>
+<strong>Publication:</strong> <em>Arizona State Law Journal</em>, "In the Era of Jurassic Park: Governing De-Extinction Through Soft Law", 2026<br/>
+<strong>Source URL:</strong> <a href="https://arizonastatelawjournal.org/wp-content/uploads/2026/06/Woodward_PUB.pdf">https://arizonastatelawjournal.org/wp-content/uploads/2026/06/Woodward_PUB.pdf</a></p>
+<blockquote>
+<p>"<strong>De-extinction is an emerging technology with an uncertain future, yet it is 'critically under-regulated.' This regulatory void may be filled through hard law or soft law approaches, or a combination of both.</strong>"</p>
+<p>"<strong>Though the Endangered Species Act would likely apply to de-extinction, its application 'would be so contrary to the law's expected application that it would stretch its original meaning beyond any recognizable interpretation.' … These regulatory authorities have not kept pace with de-extinction realities, and reformations are unlikely.</strong>"</p>
+<p>"<strong>Multiple regulatory agencies have potential authority over parts of the issue, but no single primary regulator exists. The lack of a regulatory leader increases the opportunity for oversight gaps from regulatory schemes that tend to overlap and contradict each other.</strong>"</p>
+<p>"To reap de-extinction’s benefits and mitigate its potential risks, <strong>adequate governance through soft law instruments is necessary.</strong>"</p>
+</blockquote>
+<p>"<strong>De-extinction is an emerging technology with an uncertain future, yet it is 'critically under-regulated.' This regulatory void may be filled through hard law or soft law approaches, or a combination of both.</strong>"</p>
+<p>"<strong>Though the Endangered Species Act would likely apply to de-extinction, its application 'would be so contrary to the law's expected application that it would stretch its original meaning beyond any recognizable interpretation.' … These regulatory authorities have not kept pace with de-extinction realities, and reformations are unlikely.</strong>"</p>
+<p>"<strong>Multiple regulatory agencies have potential authority over parts of the issue, but no single primary regulator exists. The lack of a regulatory leader increases the opportunity for oversight gaps from regulatory schemes that tend to overlap and contradict each other.</strong>"</p>
+<p>"To reap de-extinction’s benefits and mitigate its potential risks, <strong>adequate governance through soft law instruments is necessary.</strong>"</p>
+<p><em>(Debate Warrant: When hard law fails to provide an agency with jurisdictional authority, governance collapses into "soft law"—voluntary industry codes of conduct, private agreements, and corporate self-supervision.)</em></p>
+</section>
+<section id="section-6" class="section">
+<h2>CARD 5: Conservation Biotechnology Is Driven by Private Capital and Opaque Governance Outside International Treaties</h2>
+<p><strong>Author:</strong> Environmental Governance &amp; Conservation Biotechnology Scholars (K. F. Nielsen et al.)<br/>
+<strong>Publication:</strong> <em>Transgenic Research</em> (Springer Nature), "Emerging trends in genome editing of wild animals", Feb 6, 2026<br/>
+<strong>Source URL:</strong> <a href="https://link.springer.com/article/10.1007/s11248-026-00483-y">https://link.springer.com/article/10.1007/s11248-026-00483-y</a><br/>
+<strong>DOI:</strong> <a href="https://doi.org/10.1007/s11248-026-00483-y">https://doi.org/10.1007/s11248-026-00483-y</a></p>
+<blockquote>
+<p>"<strong>Furthermore, conservation biotechnology is heavily funded through private funding showing varying stakeholder interest, which can lead to untraditional and less transparent research processes.</strong>"</p>
+<p>"<strong>There is an urgent need to develop more adequate regulation of conservation biotechnology, as environmental release of genome-edited animals challenges definitions and guidelines in current nature protection laws and GMO regulations.</strong>"</p>
+<p>"<strong>Despite these efforts, genome editing for wildlife conservation, excluding gene drives, remains largely unaddressed in treaties as the CBD, as well as from national and regional GMO regulation and environmental law.</strong> This regulatory gap raises critical questions about definitions of species, taxonomic classification, conservation status, and whether existing frameworks can adequately protect both genome edited wild animals and ecosystems."</p>
+</blockquote>
+<p>"<strong>Furthermore, conservation biotechnology is heavily funded through private funding showing varying stakeholder interest, which can lead to untraditional and less transparent research processes.</strong>"</p>
+<p>"<strong>There is an urgent need to develop more adequate regulation of conservation biotechnology, as environmental release of genome-edited animals challenges definitions and guidelines in current nature protection laws and GMO regulations.</strong>"</p>
+<p>"<strong>Despite these efforts, genome editing for wildlife conservation, excluding gene drives, remains largely unaddressed in treaties as the CBD, as well as from national and regional GMO regulation and environmental law.</strong> This regulatory gap raises critical questions about definitions of species, taxonomic classification, conservation status, and whether existing frameworks can adequately protect both genome edited wild animals and ecosystems."</p>
+</section>
+<section id="section-7" class="section">
+<h2>CARD 6: Private Corporations Prioritize Pecuniary Interests While Core Statutory Protections Break Down</h2>
+<p><strong>Author:</strong> Lauren Corey (Legal Scholar, University of North Carolina School of Law) &amp; Prof. Alejandro E. Camacho (Director, Center for Land, Environment, and Natural Resources, UC Irvine School of Law)<br/>
+<strong>Publication:</strong> <em>North Carolina Journal of Law &amp; Technology</em> (NC JOLT), Vol. 23, Issue 2: "Resurrecting Extinction: The Legal Implications of De-Extinction Under the Endangered Species Act", Dec 2021<br/>
+<strong>Source URL:</strong> <a href="https://journals.law.unc.edu/ncjolt/wp-content/uploads/sites/4/2021/12/NCJOLT-Vol.-23.2_338-381_Corey.pdf">https://journals.law.unc.edu/ncjolt/wp-content/uploads/sites/4/2021/12/NCJOLT-Vol.-23.2_338-381_Corey.pdf</a></p>
+<blockquote>
+<p>"<strong>Individuals or corporations with ulterior motives might abuse the technology, prioritizing their personal and pecuniary interests over animal conservation, animal well-being, and environmental health.</strong>"</p>
+<p>Prof. Alejandro Camacho: "<strong>The Endangered Species Act has no framework for de-extinction, since its creators couldn’t possibly have imagined the prospect. Shortly after revival of an organism, a species could not be considered endangered throughout a significant portion of its range. Presumably not, if you have one organism sitting in a lab.</strong>"</p>
+</blockquote>
+<p>"<strong>Individuals or corporations with ulterior motives might abuse the technology, prioritizing their personal and pecuniary interests over animal conservation, animal well-being, and environmental health.</strong>"</p>
+<p>Prof. Alejandro Camacho: "<strong>The Endangered Species Act has no framework for de-extinction, since its creators couldn’t possibly have imagined the prospect. Shortly after revival of an organism, a species could not be considered endangered throughout a significant portion of its range. Presumably not, if you have one organism sitting in a lab.</strong>"</p>
+</section>
+<section id="section-8" class="section">
+<h2>CARD 7: No Global Legal Framework Exists to Regulate or Bound De-Extinct Species</h2>
+<p><strong>Author:</strong> Erin Okuno (Professor of Law &amp; Environmental Scholar, Stetson / UC Berkeley Law)<br/>
+<strong>Publication:</strong> <em>Ecology Law Quarterly</em>, Vol. 43, Issue 3, p. 581: "Frankenstein's Mammoth: Anticipating the Global Legal Framework for De-Extinction", 2016<br/>
+<strong>Source URL:</strong> <a href="https://lawcat.berkeley.edu/record/1128034/files/fulltext.pdf">https://lawcat.berkeley.edu/record/1128034/files/fulltext.pdf</a><br/>
+<strong>JSTOR Reference:</strong> <a href="https://www.jstor.org/stable/44132117">https://www.jstor.org/stable/44132117</a></p>
+<blockquote>
+<p>"<strong>No global legal framework exists to protect and regulate de-extinct species, and this Article seeks to fill that gap by anticipating how the global legal framework for de-extinction could be structured.</strong>"</p>
+<p>"<strong>Because de-extinction is still in its infancy, no comprehensive international legal framework for de-extinction currently exists. This Article seeks to fill that void by beginning to anticipate the global legal framework for de-extinction.</strong>"</p>
+<p>"This Article examines how the existing international legal framework… might affect de-extinct species as objects of trade, as migratory species, as biodiversity, as genetically modified organisms, and as intellectual property [and demonstrates that treaties must be completely modified to address de-extinct species directly]."</p>
+</blockquote>
+<p>"<strong>No global legal framework exists to protect and regulate de-extinct species, and this Article seeks to fill that gap by anticipating how the global legal framework for de-extinction could be structured.</strong>"</p>
+<p>"<strong>Because de-extinction is still in its infancy, no comprehensive international legal framework for de-extinction currently exists. This Article seeks to fill that void by beginning to anticipate the global legal framework for de-extinction.</strong>"</p>
+<p>"This Article examines how the existing international legal framework… might affect de-extinct species as objects of trade, as migratory species, as biodiversity, as genetically modified organisms, and as intellectual property [and demonstrates that treaties must be completely modified to address de-extinct species directly]."</p>
+</section>
+<section id="section-9" class="section">
+<h2>CARD 8: Corporate Self-Governance in Practice: Internal Voluntary Safeguards Are the Sole Barrier</h2>
+<p><strong>Source:</strong> Colossal Biosciences Corporate Disclosures and Ethics Oversight Manifestos<br/>
+<strong>Publication:</strong> Colossal Biosciences Public Portal ("Ethics Oversight &amp; Safeguards" &amp; "How Colossal Prioritizes Ethics"), 2026<br/>
+<strong>Source URLs:</strong><br/>
+- <a href="https://colossal.com/colossal-biosciences-ethics-oversight-safeguards/">https://colossal.com/colossal-biosciences-ethics-oversight-safeguards/</a><br/>
+- <a href="https://colossal.com/how-colossal-biosciences-prioritizes-ethics-in-de-extinction/">https://colossal.com/how-colossal-biosciences-prioritizes-ethics-in-de-extinction/</a></p>
+<blockquote>
+<p>In its official governance documentation, Colossal Biosciences defines its oversight structure as resting on:
+1. An internal, privately appointed <strong>Ethics Advisory Board</strong> composed of corporate-selected academics and advisors.
+2. Standard lab <strong>Institutional Animal Care and Use Committees (IACUC)</strong> and baseline USDA Animal Welfare Act registrations designed strictly for commercial lab housing, not wild ecological release.
+3. <strong>Voluntary commitment</strong> to the IUCN Species Survival Commission guidelines.</p>
+</blockquote>
+<p>In its official governance documentation, Colossal Biosciences defines its oversight structure as resting on:
+1. An internal, privately appointed <strong>Ethics Advisory Board</strong> composed of corporate-selected academics and advisors.
+2. Standard lab <strong>Institutional Animal Care and Use Committees (IACUC)</strong> and baseline USDA Animal Welfare Act registrations designed strictly for commercial lab housing, not wild ecological release.
+3. <strong>Voluntary commitment</strong> to the IUCN Species Survival Commission guidelines.</p>
+<p><em>(Debate Warrant: There is no statute compelling external compliance; if Colossal Biosciences chooses to alter, waive, or disregard its internal advisory board or self-selected guidelines, no federal or international enforcement mechanism exists to revoke its license or block captive synthesis.)</em></p>
+</section>
+<section id="section-10" class="section">
+<h2>Strategic Debate Round Breakdown</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Argument Step</th>
+<th style="text-align: left;">Primary Card to Read</th>
+<th style="text-align: left;">Core Warrant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Inherency / Statutory Void</strong></td>
+<td style="text-align: left;"><strong>Babcock (Georgetown Law)</strong> &amp; <strong>Soffer (JSPG)</strong></td>
+<td style="text-align: left;">Existing statutes (ESA § 10(j), NEPA) do not apply to extinct organisms sitting in private commercial labs; government agencies possess neither clear mandates nor unified jurisdiction.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Corporate Self-Governance Link</strong></td>
+<td style="text-align: left;"><strong>Babcock (2019)</strong> &amp; <strong>Woodward (ASLJ 2026)</strong></td>
+<td style="text-align: left;">Regulators have completely failed to act, directly forcing the de-extinction sector to substitute traditional governmental functions with private self-regulation, voluntary codes, and soft law.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Corporate Admission / Concession</strong></td>
+<td style="text-align: left;"><strong>IUCN / Colossal Guidelines (2026)</strong></td>
+<td style="text-align: left;">Colossal Biosciences' own endorsed ethical handbook admits outright that a "policy vacuum" exists and that conventional national species conservation acts do not reach proxy de-extinction.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Commercial Bias &amp; Pecuniary Abuse</strong></td>
+<td style="text-align: left;"><strong>Corey &amp; Camacho (NC JOLT)</strong> &amp; <strong>Nielsen et al. (Transgenic Research 2026)</strong></td>
+<td style="text-align: left;">Private venture funding makes research opaque and beholden to commercial spectacle, creating risks that corporate actors will prioritize profit over ecological consequences.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Impact / Unrestrained Action</strong></td>
+<td style="text-align: left;"><strong>Babcock (2019)</strong> &amp; <em>New Republic</em> (2022)</td>
+<td style="text-align: left;">"De-extinction is going forward unregulated... enabling de-extinction activities to continue unrestrained, and there is little hope of government action closing this gap any time soon."</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+        <footer class="footer">
+          <p>Oracle Research — De-Extinction Governance & Corporate Self-Regulation: Debate Cards & Evidence</p>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">&#9650;</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.section[id]');
+      const tocLinks = document.querySelectorAll('.toc-link, .toc-sublink');
+      function updateActiveLink() {
+        let current = '';
+        sections.forEach(function(s) {
+          if (pageYOffset >= s.offsetTop - 100) current = s.getAttribute('id');
+        });
+        tocLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+        });
+      }
+      window.addEventListener('scroll', updateActiveLink);
+      updateActiveLink();
+
+      // Back-to-top button — visible after 300px scroll
+      const btn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function() {
+        btn.classList.toggle('visible', pageYOffset > 300);
+      });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Collapsible TOC - click section to toggle sub-items
+      const isMobile = window.innerWidth <= 900;
+      document.querySelectorAll('.toc-item').forEach(function(item) {
+        const sublist = item.querySelector('.toc-sublist');
+        if (!sublist) return;
+        const link = item.querySelector('.toc-link');
+        if (link) link.style.cursor = 'pointer';
+        if (isMobile) sublist.classList.add('collapsed');
+        if (link) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            sublist.classList.toggle('collapsed');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
